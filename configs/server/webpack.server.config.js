@@ -37,13 +37,8 @@ module.exports = {
 
     entry: {
         server: removeEmpty([
-            // hot reload runtime
             ifHot('webpack/hot/signal'),
-
-            // runtime for isomorphic envs
             './src/isomorphic-env/runtime',
-
-            // entry
             './src/server/index.js'
         ])
     },
@@ -51,7 +46,6 @@ module.exports = {
     watch: isHot,
 
     watchOptions: {
-        // ignored, info-verbosity
     },
 
     resolve: {
@@ -74,13 +68,13 @@ module.exports = {
 
     output: {
         path: path.resolve(process.cwd(), 'dist/server/'),
-        filename: 'server.js',
+        filename: '[name].js',
         pathinfo: isDev
     },
 
     optimization: {
-        minimize: isProd,
-        namedChunks: true
+        chunkIds: 'named',
+        minimize: isProd
     },
 
     module: {

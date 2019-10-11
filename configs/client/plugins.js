@@ -8,7 +8,7 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 const SentryPlugin = require('@sentry/webpack-plugin');
 
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
-const { UnusedFilesWebpackPlugin } = require('unused-files-webpack-plugin');
+// const { UnusedFilesWebpackPlugin } = require('unused-files-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const IsomorphicEnvClientPlugin = require('../../../src/isomorphic-env/client-plugin');
@@ -57,22 +57,19 @@ module.exports = removeEmpty([
         })
     ),
 
-    new UnusedFilesWebpackPlugin({
-        patterns: 'src/**/*.*',
-        globOptions: {
-            ignore: ['node_modules/**/*', 'src/**/__tests__/**/*', 'src/server/**/*']
-        }
-    }),
+    // new UnusedFilesWebpackPlugin({
+    //     patterns: 'src/**/*.*',
+    //     globOptions: {
+    //         ignore: ['node_modules/**/*', 'src/**/__tests__/**/*', 'src/server/**/*']
+    //     }
+    // }),
 
     ifProd(
         new DuplicatePackageCheckerPlugin({
             verbose: true,
-            // включить после апдейта зависимостей
             emitError: false
         })
     ),
-
-    ifProd(new webpack.HashedModuleIdsPlugin()),
 
     ifProd(
         new webpack.optimize.LimitChunkCountPlugin({
