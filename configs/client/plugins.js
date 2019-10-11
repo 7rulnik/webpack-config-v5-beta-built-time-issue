@@ -67,6 +67,7 @@ module.exports = removeEmpty([
     ifProd(
         new DuplicatePackageCheckerPlugin({
             verbose: true,
+            // включить после апдейта зависимостей
             emitError: false
         })
     ),

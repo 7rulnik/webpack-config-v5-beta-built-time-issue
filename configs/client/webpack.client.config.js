@@ -37,12 +37,16 @@ module.exports = {
 
     entry: {
         main: [
+            // publicPath runtime setter
             './src/client/runtime.js',
+
+            // entry point
             './src/client/index.jsx'
         ]
     },
 
     devServer: {
+        // stats, quiet, clientLogLevel, noInfo, headers
         disableHostCheck: true,
         historyApiFallback: true,
         hot: true,
@@ -53,6 +57,7 @@ module.exports = {
             'Access-Control-Allow-Origin': '*'
         },
         watchOptions: {
+            // ignored, info-verbosity
         },
         port: 3001,
         sockPort: 3001,
@@ -81,6 +86,7 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
+                // TODO(denisx,pavelozavr): Собираем все стили в один файл, иначе они развалятся, тк в css мы ошиблись с весами
                 styles: {
                     name: 'styles',
                     test: /\.css$/,
@@ -107,6 +113,7 @@ module.exports = {
                 ],
 
                 loader: 'babel-loader',
+                // Ориентриуемся на https://github.com/facebook/create-react-app/blob/master/packages/babel-preset-react-app/create.js
                 options: {
                     cacheDirectory,
                     cacheCompression: false,
